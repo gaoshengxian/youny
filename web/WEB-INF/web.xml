@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 id="gaeainfo_project_ID" version="2.5">
+		 
+	<display-name>youny</display-name>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>/controller/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	
+
+	
+	<!-- 公共模块配置 start -->
+	
+	<!-- 图标库上传 
+	<servlet>
+		<servlet-name>ImageUploadServlet</servlet-name>
+		<servlet-class>com.gaeainfo.core.uploads.ImageUploadServlet</servlet-class> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ImageUploadServlet</servlet-name> 
+		<url-pattern>/imageupload</url-pattern>
+	</servlet-mapping> 
+	-->
+	<!-- 导出Excel文件，不同的导出类型，需要对应的导出实现类 
+	<servlet>
+		<servlet-name>ExportExcelServlet</servlet-name>
+		<servlet-class>com.gaeainfo.excel.ExportExcelServlet</servlet-class> 
+		<init-param>
+			<param-name>test</param-name>
+			<param-value>com.gaeainfo.exceltmpl.service.ExportExcelServiceImpl</param-value> 
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportExcelServlet</servlet-name> 
+		<url-pattern>/exportExcel</url-pattern>
+	</servlet-mapping>
+	-->
+	<!-- fusionchart导出 
+	<servlet>
+		<servlet-name>FusionChartExport</servlet-name>
+		<servlet-class>com.gaeainfo.fusioncharts.FusionChartExport</servlet-class> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FusionChartExport</servlet-name> 
+		<url-pattern>/exportChart</url-pattern>
+	</servlet-mapping>
+	-->
+	<!-- 公共模块配置 end -->
+	
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/500.jsp</location>
+	</error-page>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

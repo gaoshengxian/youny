@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youny.user.mapper.DemoMapper">
+	<resultMap id="DemoUserResultMap"
+		type="com.youny.user.bo.DemoUser">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+		<result column="DISPLAY_ORDER" property="displayOrder" jdbcType="INTEGER" />
+		<result column="BID" property="bid" jdbcType="VARCHAR" />
+		<result column="EXT_NUMBER" property="extNumber" jdbcType="VARCHAR" />
+		<result column="ID_NUMBER" property="idNumber" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+	</resultMap>
+	
+   <select id="getUserList"  resultMap="DemoUserResultMap">
+	select * from T_AUTH_USERINFO 
+   </select>
+   
+</mapper>

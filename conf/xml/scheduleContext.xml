@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	
+	Field Name   Allowed Values   Allowed Special Characters 
+	Seconds            0-59              , - * / 
+	Minutes            0-59              , - * / 
+	Hours              0-23              , - * / 
+	Day-of-month       1-31              , - * ? / L C 
+	Month              1-12 or JAN-DEC   , - * / 
+	Day-of-Week        1-7 or SUN-SAT    , - * ? / L C # 
+	Year (Optional)    empty, 1970-2099  , - * / 
+	
+	
+	The '*' character is used to specify all values. For example, "*" in the minute field means "every minute". 
+	
+	The '?' character is allowed for the day-of-month and day-of-week fields. It is used to specify 'no specific value'. This is useful when you need to specify something in one of the two fileds, but not the other. See the examples below for clarification. 
+	
+	The '-' character is used to specify ranges For example "10-12" in the hour field means "the hours 10, 11 and 12". 
+	
+	The ',' character is used to specify additional values. For example "MON,WED,FRI" in the day-of-week field means "the days Monday, Wednesday, and Friday". 
+	
+	The '/' character is used to specify increments. For example "0/15" in the seconds field means "the seconds 0, 15, 30, and 45". And "5/15" in the seconds field means "the seconds 5, 20, 35, and 50". You can also specify '/' after the '*' character - in this case '*' is equivalent to having '0' before the '/'. 
+	
+	The 'L' character is allowed for the day-of-month and day-of-week fields. This character is short-hand for "last", but it has different meaning in each of the two fields. For example, the value "L" in the day-of-month field means "the last day of the month" - day 31 for January, day 28 for February on non-leap years. If used in the day-of-week field by itself, it simply means "7" or "SAT". But if used in the day-of-week field after another value, it means "the last xxx day of the month" - for example "6L" means "the last friday of the month". When using the 'L' option, it is important not to specify lists, or ranges of values, as you'll get confusing results. 
+	
+	The '#' character is allowed for the day-of-week field. This character is used to specify "the nth" XXX day of the month. For example, the value of "6#3" in the day-of-week field means the third Friday of the month (day 6 = Friday and "#3" = the 3rd one in the month). Other examples: "2#1" = the first Monday of the month and "4#5" = the fifth Wednesday of the month. Note that if you specify "#5" and there is not 5 of the given day-of-week in the month, then no firing will occur that month. 
+	
+	The 'C' character is allowed for the day-of-month and day-of-week fields. This character is short-hand for "calendar". This means values are calculated against the associated calendar, if any. If no calendar is associated, then it is equivalent to having an all-inclusive calendar. A value of "5C" in the day-of-month field means "the first day included by the calendar on or after the 5th". A value of "1C" in the day-of-week field means "the first day included by the calendar on or after sunday". 
+	
+	The legal characters and the names of months and days of the week are not case sensitive. 
+	
+-->
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd           
+							   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+							   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+							   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd          
+							   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+						   
+	<!---->
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="dataManageTrigger2" />-->
+			</list>
+		</property>
+		<property name="startupDelay" value="30" />
+	</bean>
+	
+	
+
+	<!-- <bean id="schedulerManager2" class="com.gaeainfo.project.test2.scheduler.SchedulerManager2">
+		<property name="cacheService2"><ref bean="cacheManageService2"/></property>
+	</bean> -->
+	
+	<!-- <bean id="dataManageTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="dataManageJobDetail2" />
+		<property name="cronExpression" value="0/1 * * * * ? " />
+	</bean>
+	<bean id="dataManageJobDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="schedulerManager2" />
+		<property name="targetMethod" value="initDataManage" />
+		<property name="concurrent" value="false" />
+	</bean> -->
+	
+</beans>

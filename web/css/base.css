@@ -1,0 +1,32 @@
+html, body, h1, h2, h2, h3, h4, h5, h6, p, ul, li, form, fieldset, legend, input, button, textarea, th, tr, td, caption {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	color: #333333;
+	font: 12px/1.2 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+input, textarea, div {
+	outline: medium none;
+	resize: none;
+}
+
+fieldset, img {
+	border: 0 none;
+}
+
+ul, li {
+	list-style: none outside none;
+}
+
+a {
+	outline: medium none;
+}
+
